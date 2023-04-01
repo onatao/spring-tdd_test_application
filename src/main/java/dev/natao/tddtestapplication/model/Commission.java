@@ -2,7 +2,7 @@ package dev.natao.tddtestapplication.model;
 
 public class Commission {
 
-    public Double bonusCommission(Double amount) {
+    public Double commissionValue(Double amount) {
         return 0d;
     }
     
