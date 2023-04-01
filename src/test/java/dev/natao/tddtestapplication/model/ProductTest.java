@@ -33,8 +33,5 @@ public class ProductTest {
         double result = productTest.totalValue();
         // Assert - confirmation
         Assertions.assertEquals(expectedValue, result);
-    }
-
-
-    
+    }   
 }
