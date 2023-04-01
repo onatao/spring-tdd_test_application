@@ -33,7 +33,7 @@ public class ProductController {
         return new ResponseEntity<>(productOpt, HttpStatus.OK);
     } 
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         return new ResponseEntity<>(product, HttpStatus.OK); 
     }

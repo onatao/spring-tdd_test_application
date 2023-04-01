@@ -56,8 +56,19 @@ public class ProductControllerTest {
          *  and the expected is HttpStatus.OK
          */
         this.mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk());
-        
-        
+    }
+
+    @Test
+    public void testing_findById_HttpStatus() throws Exception {
+        var requestIdBuilder = MockMvcRequestBuilders.get("/api/product/{id}");
+
+        this.mockMvc.perform(requestIdBuilder).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void testing_addProduct_HttpStatus() throws Exception {
+        var postBuilder = MockMvcRequestBuilders.post("/api/product");
+        this.mockMvc.perform(postBuilder).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 }
