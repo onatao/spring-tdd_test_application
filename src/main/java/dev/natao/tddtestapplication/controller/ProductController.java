@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.natao.tddtestapplication.model.Product;
 
 @RestController
-@RequestMapping("/api/pessoas")
+@RequestMapping("/api/product")
 public class ProductController {
     
     @GetMapping
