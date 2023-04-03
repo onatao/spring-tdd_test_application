@@ -40,10 +40,9 @@ public class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc; 
 
-    private 
 
     @BeforeEach 
-    void setupMethod() {
+    public void setupMethod() {
         // Used to test requests on ProductController
         this.mockMvc = MockMvcBuilders.standaloneSetup(productController).build();
     }

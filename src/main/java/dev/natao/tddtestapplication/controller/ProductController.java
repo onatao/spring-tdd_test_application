@@ -27,14 +27,12 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<Product>> findAll() {
         List<Product> productList = productService.findAll();
-
         return new ResponseEntity<>(productList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Product>> findById(@PathVariable Long id) {
         Optional<Product> productOpt = productService.findById(id);
-
         return new ResponseEntity<>(productOpt, HttpStatus.OK);
     } 
 
