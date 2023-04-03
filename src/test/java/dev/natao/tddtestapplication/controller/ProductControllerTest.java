@@ -1,6 +1,11 @@
 package dev.natao.tddtestapplication.controller;
 
 
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import dev.natao.tddtestapplication.model.Product;
 import dev.natao.tddtestapplication.service.ProductService;
 
 
@@ -37,7 +43,7 @@ public class ProductControllerTest {
     private 
 
     @BeforeEach 
-    public void setupMethod() {
+    void setupMethod() {
         // Used to test requests on ProductController
         this.mockMvc = MockMvcBuilders.standaloneSetup(productController).build();
     }
@@ -52,7 +58,13 @@ public class ProductControllerTest {
          *  Create a get request (sameway happens on Postman)
          *  using API path.
          */
+        List<Product> productList = new ArrayList<>();
         var requestBuilder = MockMvcRequestBuilders.get("/api/product");
+        /*
+         *  when - Mockito method that can call any method
+         *  thenReturn - return productList
+         */
+        when(this.productService.findAll()).thenReturn(productList);
   
         /** 
          *  Act - action and Assert - confirmation
