@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,5 +72,20 @@ public class ProductControllerTest {
          *  and the expected is HttpStatus.OK
          */
         this.mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void testing_findById_HttpStatus() throws Exception {
+        // Preparation - creating a dummy product for test
+        Product productTest = new Product();
+        productTest.setProductId(2);
+        productTest.setProductName("Smartphone");
+        productTest.setProductQuantity(10);
+        Optional<Product> productOpt = Optional.of(productTest);
+        // Action - iniciating the request
+        var requestBuilder = MockMvcRequestBuilders.get("/api/product/2");
+        when(this.productService.findById(2)).thenReturn(productOpt);
+        // .jsonPath - allow to pick up json data and compare
+        this.mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.jsonPath("$.productId").value(2));
     }
 }

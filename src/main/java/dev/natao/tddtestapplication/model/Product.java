@@ -2,7 +2,7 @@ package dev.natao.tddtestapplication.model;
 
 public class Product {
 
-    private Long productId;
+    private Integer productId;
     private String productName;
     private Integer productQuantity;
     private Double productValue;
@@ -10,11 +10,11 @@ public class Product {
     private Double additionValue;
 
 
-    public Long getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 

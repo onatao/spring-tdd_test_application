@@ -16,7 +16,7 @@ public class ProductService {
         return productList;
     }
 
-    public Optional<Product> findById(Long id) {
+    public Optional<Product> findById(Integer id) {
         Optional<Product> product = Optional.of(new Product());
         return product;
     }
