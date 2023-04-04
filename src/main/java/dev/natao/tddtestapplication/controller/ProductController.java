@@ -38,6 +38,6 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-        return new ResponseEntity<>(productService.addProduct(product), HttpStatus.OK); 
+        return new ResponseEntity<>(productService.addProduct(product), HttpStatus.CREATED); 
     }
 }

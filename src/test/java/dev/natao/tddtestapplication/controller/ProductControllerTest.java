@@ -12,10 +12,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dev.natao.tddtestapplication.model.Product;
 import dev.natao.tddtestapplication.service.ProductService;
@@ -86,6 +89,30 @@ public class ProductControllerTest {
         var requestBuilder = MockMvcRequestBuilders.get("/api/product/2");
         when(this.productService.findById(2)).thenReturn(productOpt);
         // .jsonPath - allow to pick up json data and compare
-        this.mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.jsonPath("$.productId").value(2));
+        this.mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers
+        .jsonPath("$.productId").value("2"));
+    }
+
+    @Test
+    public void testing_addProduct_HttpStatus() throws Exception {
+        // Creating a dummy product for test (will be added)
+        Product productTest = new Product();
+        productTest.setProductName("Smartphone");
+        productTest.setProductQuantity(10);
+
+        // Turning the dummy product in JSON
+        String json = new ObjectMapper().writeValueAsString(productTest);
+
+        // Creating POST resquest
+        var requestBuilder = MockMvcRequestBuilders.post("/api/product")
+        .content(json) // Putting the json as a content
+        .contentType(MediaType.APPLICATION_JSON); // set the Header for JSON
+
+        // Setting product ID - will be returned
+        productTest.setProductId(2);
+        when(this.productService.addProduct(productTest)).thenReturn(productTest);
+
+        // Perfoming the request
+        this.mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isCreated());
     }
 }
